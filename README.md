@@ -7,8 +7,11 @@ Changes
 2. Support build for Android
 
     depends on android-ndk
+    
     the default path is "~/Android/Sdk/ndk-bundle", change as yours in Makefile
+    
     build commands for Android: make; binary is located at build/iperf
+    
     build commands for Linux: make host; binary is located at build_host/iperf
 
 Summary
