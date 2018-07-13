@@ -389,7 +389,7 @@ iperf_udp_accept(struct iperf_test *test)
 	}
     }
 	
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
     /* If socket pacing is specified, try it. */
     if (test->settings->fqrate) {
 	/* Convert bits per second to bytes per second */
@@ -403,7 +403,7 @@ iperf_udp_accept(struct iperf_test *test)
 	    }
 	}
     }
-#endif /* HAVE_SO_MAX_PACING_RATE */
+#endif /* SO_MAX_PACING_RATE */
     {
 	unsigned int rate = test->settings->rate / 8;
 	if (rate > 0) {
@@ -501,7 +501,7 @@ iperf_udp_connect(struct iperf_test *test)
 	}
     }
 	
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
     /* If socket pacing is available and not disabled, try it. */
     if (test->settings->fqrate) {
 	/* Convert bits per second to bytes per second */
@@ -515,7 +515,7 @@ iperf_udp_connect(struct iperf_test *test)
 	    }
 	}
     }
-#endif /* HAVE_SO_MAX_PACING_RATE */
+#endif /* SO_MAX_PACING_RATE */
     {
 	unsigned int rate = test->settings->rate / 8;
 	if (rate > 0) {

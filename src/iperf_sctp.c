@@ -42,6 +42,10 @@
 #include <netinet/sctp.h>
 #endif /* HAVE_NETINET_SCTP_H */
 
+#ifdef HAVE_LINUX_SCTP_H
+#include <linux/sctp.h>
+#endif
+
 #include "iperf.h"
 #include "iperf_api.h"
 #include "iperf_sctp.h"

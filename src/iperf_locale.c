@@ -136,7 +136,7 @@ const char usage_longstr[] = "Usage: iperf3 [-s|-c host] [options]\n"
                            "                            (default %d Mbit/sec for UDP, unlimited for TCP)\n"
                            "                            (optional slash and packet count for burst mode)\n"
 			   "  --pacing-timer #[KMG]     set the timing for pacing, in microseconds (default 1000)\n"
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
                            "  --fq-rate #[KMG]          enable fair-queuing based socket pacing in\n"
 			   "                            bits/sec (Linux only)\n"
 #endif
@@ -149,9 +149,9 @@ const char usage_longstr[] = "Usage: iperf3 [-s|-c host] [options]\n"
                            "  -P, --parallel  #         number of parallel client streams to run\n"
                            "  -R, --reverse             run in reverse mode (server sends, client receives)\n"
                            "  -w, --window    #[KMG]    set window size / socket buffer size\n"
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
                            "  -C, --congestion <algo>   set TCP congestion control algorithm (Linux and FreeBSD only)\n"
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
                            "  -M, --set-mss   #         set TCP/SCTP maximum segment size (MTU - 40 bytes)\n"
                            "  -N, --no-delay            set TCP/SCTP no delay, disabling Nagle's Algorithm\n"
                            "  -4, --version4            only use IPv4\n"
@@ -163,9 +163,9 @@ const char usage_longstr[] = "Usage: iperf3 [-s|-c host] [options]\n"
                            "  --dscp N or --dscp val    set the IP dscp value, either 0-63 or symbolic.\n"
                            "                            Numeric values can be specified in decimal,\n"
                            "                            octal and hex (see --tos above).\n"
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
                            "  -L, --flowlabel N         set the IPv6 flow label (only supported on Linux)\n"
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
                            "  -Z, --zerocopy            use a 'zero copy' method of sending data\n"
                            "  -O, --omit N              omit the first n seconds\n"
                            "  -T, --title str           prefix every output line with this string\n"

@@ -256,7 +256,7 @@ get_optional_features(void)
     numfeatures++;
 #endif /* HAVE_CPU_AFFINITY */
     
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
     if (numfeatures > 0) {
 	strncat(features, ", ", 
 		sizeof(features) - strlen(features) - 1);
@@ -264,7 +264,7 @@ get_optional_features(void)
     strncat(features, "IPv6 flow label", 
 	sizeof(features) - strlen(features) - 1);
     numfeatures++;
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
     
 #if defined(HAVE_SCTP)
     if (numfeatures > 0) {
@@ -276,7 +276,7 @@ get_optional_features(void)
     numfeatures++;
 #endif /* HAVE_SCTP */
     
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
     if (numfeatures > 0) {
 	strncat(features, ", ", 
 		sizeof(features) - strlen(features) - 1);
@@ -284,7 +284,7 @@ get_optional_features(void)
     strncat(features, "TCP congestion algorithm setting", 
 	sizeof(features) - strlen(features) - 1);
     numfeatures++;
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
     
 #if defined(HAVE_SENDFILE)
     if (numfeatures > 0) {
@@ -296,7 +296,7 @@ get_optional_features(void)
     numfeatures++;
 #endif /* HAVE_SENDFILE */
 
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
     if (numfeatures > 0) {
 	strncat(features, ", ",
 		sizeof(features) - strlen(features) - 1);
@@ -304,7 +304,7 @@ get_optional_features(void)
     strncat(features, "socket pacing",
 	sizeof(features) - strlen(features) - 1);
     numfeatures++;
-#endif /* HAVE_SO_MAX_PACING_RATE */
+#endif /* SO_MAX_PACING_RATE */
 
 #if defined(HAVE_SSL)
     if (numfeatures > 0) {

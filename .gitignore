@@ -28,3 +28,5 @@ examples/.libs
 examples/Makefile
 examples/mic
 examples/mis
+build
+build_host

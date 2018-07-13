@@ -737,9 +737,9 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
         {"tos", required_argument, NULL, 'S'},
         {"dscp", required_argument, NULL, OPT_DSCP},
 	{"extra-data", required_argument, NULL, OPT_EXTRA_DATA},
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
         {"flowlabel", required_argument, NULL, 'L'},
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
         {"zerocopy", no_argument, NULL, 'Z'},
         {"omit", required_argument, NULL, 'O'},
         {"file", required_argument, NULL, 'F'},
@@ -748,10 +748,10 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
         {"affinity", required_argument, NULL, 'A'},
 #endif /* HAVE_CPU_AFFINITY */
         {"title", required_argument, NULL, 'T'},
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
         {"congestion", required_argument, NULL, 'C'},
         {"linux-congestion", required_argument, NULL, 'C'},
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
 #if defined(HAVE_SCTP)
         {"sctp", no_argument, NULL, OPT_SCTP},
         {"nstreams", required_argument, NULL, OPT_NUMSTREAMS},
@@ -991,7 +991,7 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
 		client_flag = 1;
 	        break;
             case 'L':
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
                 test->settings->flowlabel = strtol(optarg, &endptr, 0);
 		if (endptr == optarg ||
 		    test->settings->flowlabel < 1 || test->settings->flowlabel > 0xfffff) {
@@ -999,10 +999,10 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
                     return -1;
 		}
 		client_flag = 1;
-#else /* HAVE_FLOWLABEL */
+#else /* IPV6_FLOWLABEL_MGR */
                 i_errno = IEUNIMP;
                 return -1;
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
                 break;
             case 'X':
 		xbe = (struct xbind_entry *)malloc(sizeof(struct xbind_entry));
@@ -1068,13 +1068,13 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
 		client_flag = 1;
                 break;
 	    case 'C':
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
 		test->congestion = strdup(optarg);
 		client_flag = 1;
-#else /* HAVE_TCP_CONGESTION */
+#else /* TCP_CONGESTION */
 		i_errno = IEUNIMP;
 		return -1;
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
 		break;
 	    case 'd':
 		test->debug = 1;
@@ -1097,20 +1097,20 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
 		test->udp_counters_64bit = 1;
 		break;
 	    case OPT_NO_FQ_SOCKET_PACING:
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
 		printf("Warning:  --no-fq-socket-pacing is deprecated\n");
 		test->settings->fqrate = 0;
 		client_flag = 1;
-#else /* HAVE_SO_MAX_PACING_RATE */
+#else /* SO_MAX_PACING_RATE */
 		i_errno = IEUNIMP;
 		return -1;
 #endif
 		break;
 	    case OPT_FQ_RATE:
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
 		test->settings->fqrate = unit_atof_rate(optarg);
 		client_flag = 1;
-#else /* HAVE_SO_MAX_PACING_RATE */
+#else /* SO_MAX_PACING_RATE */
 		i_errno = IEUNIMP;
 		return -1;
 #endif

@@ -42,9 +42,9 @@
 #include "net.h"
 #include "cjson.h"
 
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
 #include "flowlabel.h"
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
 
 /* iperf_tcp_recv
  *
@@ -234,7 +234,7 @@ iperf_tcp_listen(struct iperf_test *test)
                 return -1;
             }
         }
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
     /* If fq socket pacing is specified, enable it. */
     if (test->settings->fqrate) {
 	/* Convert bits per second to bytes per second */
@@ -248,7 +248,7 @@ iperf_tcp_listen(struct iperf_test *test)
 	    }
 	}
     }
-#endif /* HAVE_SO_MAX_PACING_RATE */
+#endif /* SO_MAX_PACING_RATE */
     {
 	unsigned int rate = test->settings->rate / 8;
 	if (rate > 0) {
@@ -543,7 +543,7 @@ iperf_tcp_connect(struct iperf_test *test)
 	cJSON_AddNumberToObject(test->json_start, "rcvbuf_actual", rcvbuf_actual);
     }
 
-#if defined(HAVE_FLOWLABEL)
+#if defined(IPV6_FLOWLABEL_MGR)
     if (test->settings->flowlabel) {
         if (server_res->ai_addr->sa_family != AF_INET6) {
 	    saved_errno = errno;
@@ -586,9 +586,9 @@ iperf_tcp_connect(struct iperf_test *test)
             } 
 	}
     }
-#endif /* HAVE_FLOWLABEL */
+#endif /* IPV6_FLOWLABEL_MGR */
 
-#if defined(HAVE_SO_MAX_PACING_RATE)
+#if defined(SO_MAX_PACING_RATE)
     /* If socket pacing is specified try to enable it. */
     if (test->settings->fqrate) {
 	/* Convert bits per second to bytes per second */
@@ -602,7 +602,7 @@ iperf_tcp_connect(struct iperf_test *test)
 	    }
 	}
     }
-#endif /* HAVE_SO_MAX_PACING_RATE */
+#endif /* SO_MAX_PACING_RATE */
     {
 	unsigned int rate = test->settings->rate / 8;
 	if (rate > 0) {

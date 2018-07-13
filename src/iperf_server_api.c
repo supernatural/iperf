@@ -59,11 +59,11 @@
 #include "iperf_util.h"
 #include "iperf_locale.h"
 
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
 #if !defined(TCP_CA_NAME_MAX)
 #define TCP_CA_NAME_MAX 16
 #endif /* TCP_CA_NAME_MAX */
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
 
 int
 iperf_server_listen(struct iperf_test *test)
@@ -386,9 +386,9 @@ int
 iperf_run_server(struct iperf_test *test)
 {
     int result, s, streams_accepted;
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
     int saved_errno;
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
     fd_set read_set, write_set;
     struct iperf_stream *sp;
     struct timeval now;
@@ -462,7 +462,7 @@ iperf_run_server(struct iperf_test *test)
                         return -1;
 		    }
 
-#if defined(HAVE_TCP_CONGESTION)
+#if defined(TCP_CONGESTION)
 		    if (test->protocol->id == Ptcp) {
 			if (test->congestion) {
 			    if (setsockopt(s, IPPROTO_TCP, TCP_CONGESTION, test->congestion, strlen(test->congestion)) < 0) {
@@ -505,7 +505,7 @@ iperf_run_server(struct iperf_test *test)
 			    }
 			}
 		    }
-#endif /* HAVE_TCP_CONGESTION */
+#endif /* TCP_CONGESTION */
 
                     if (!is_closed(s)) {
                         sp = iperf_new_stream(test, s);
