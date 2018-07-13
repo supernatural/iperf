@@ -40,6 +40,7 @@ check_include_file("dlfcn.h" HAVE_DLFCN_H)
 check_include_file("endian.h" HAVE_ENDIAN_H)
 check_include_file("sys/endian.h" HAVE_SYS_ENDIAN_H)
 check_include_file("netinet/sctp.h" HAVE_NETINET_SCTP_H)
+check_include_file("netinet/sctp.h" HAVE_SCTP_H)
 check_include_file("poll.h" HAVE_POLL_H)
 check_include_file("openssl/ssl.h" HAVE_SSL)
 check_include_file("sys/socket.h" HAVE_SYS_SOCKET_H)
@@ -53,10 +54,6 @@ check_function_exists("SetProcessAffinityMask" HAVE_SETPROCESSAFFINITYMASK)
 set(CMAKE_EXTRA_INCLUDE_FILES "netinet/sctp.h")
 check_type_size("struct sctp_assoc_value" STRUCT_SCTP_ASSOC_VALUE)
 set(CMAKE_EXTRA_INCLUDE_FILES)
-
-if (HAVE_NETINET_SCTP_H)
-    set (HAVE_SCTP 1)
-endif()
 
 configure_file ("${PROJECT_SOURCE_DIR}/src/version.h.in" "${PROJECT_BINARY_DIR}/version.h")
 configure_file ("${PROJECT_SOURCE_DIR}/src/iperf_config.h.in" "${PROJECT_BINARY_DIR}/iperf_config.h")
@@ -97,3 +94,8 @@ add_executable(iperf
     src/units.h
     src/version.h
 )
+
+if (HAVE_SCTP_H)
+    find_library(LIB_SCTP sctp)
+    target_link_libraries(iperf ${LIB_SCTP})
+endif()
